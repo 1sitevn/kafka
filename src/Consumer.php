@@ -25,6 +25,13 @@ class Consumer
         $consumer = new \Kafka\Consumer();
         $consumer->start(function ($topic, $part, $message) {
             var_dump($topic, $part, $message);
+            $fp = fopen('data.txt', 'a');
+            fwrite($fp, json_encode([
+                'topic' => $topic,
+                'part' => $part,
+                'message' => $message,
+            ]));
+            fclose($fp);
         });
     }
 }
