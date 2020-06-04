@@ -45,18 +45,13 @@ class ConsumerTest extends TestCase
      */
     public function testListener()
     {
-        $this->service->listener(function ($response) {
-            $fp = fopen('data.txt', "a+");
-
+        $this->service->listener(function ($topic, $response) {
             $data = json_encode([
+                'topic' => $topic,
                 'response' => $response,
             ]);
 
-            echo "\n" . $data;
-
-            fwrite($fp, $data);
-
-            fclose($fp);
+            file_put_contents('data.txt', $data, FILE_APPEND | LOCK_EX);
         });
 
         return $this->assertTrue(true);

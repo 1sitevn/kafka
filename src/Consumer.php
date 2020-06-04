@@ -22,7 +22,10 @@ class Consumer
 
         $consumer = new \Kafka\Consumer();
         $consumer->start(function ($topic, $part, $response) use ($callback) {
-            call_user_func($callback, $response);
+            call_user_func($callback, [
+                $topic,
+                $response
+            ]);
         });
     }
 }
