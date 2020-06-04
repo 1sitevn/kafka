@@ -10,10 +10,8 @@ namespace OneSite\Kafka;
  */
 class Consumer
 {
-    /**
-     *
-     */
-    public function listener()
+
+    public function listener($callback)
     {
         $config = \Kafka\ConsumerConfig::getInstance();
         $config->setMetadataRefreshIntervalMs(10000);
@@ -23,20 +21,8 @@ class Consumer
         $config->setTopics(['test']);
 
         $consumer = new \Kafka\Consumer();
-        $consumer->start(function ($topic, $part, $response) {
-            $fp = fopen('data.txt', 'a');
-
-            $data = json_encode([
-                'topic' => $topic,
-                'part' => $part,
-                'response' => $response,
-            ]);
-
-            fwrite($fp, $data);
-
-            fclose($fp);
-
-            echo $data;
+        $consumer->start(function ($topic, $part, $response) use ($callback) {
+            call_user_func($callback, $response);
         });
     }
 }
