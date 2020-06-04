@@ -45,7 +45,7 @@ class ConsumerTest extends TestCase
      */
     public function testListener()
     {
-        $data = $this->service->send();
+        $data = $this->service->listener();
 
         echo "\n" . json_encode($data);
 
