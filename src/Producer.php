@@ -3,14 +3,16 @@
 namespace OneSite\Kafka;
 
 
+/**
+ * Class Producer
+ * @package OneSite\Kafka
+ */
 class Producer
 {
 
-    public function __construct()
-    {
-
-    }
-
+    /**
+     * @return array
+     */
     public function send()
     {
         $config = \Kafka\ProducerConfig::getInstance();
@@ -38,8 +40,6 @@ class Producer
             var_dump($errorCode);
         });
         $producer->send(true);
-
-        exit;
 
         return [];
     }

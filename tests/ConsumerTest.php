@@ -4,16 +4,15 @@
 namespace OneSite\Kafka;
 
 
-use OneSite\Kafka\Producer;
 use PHPUnit\Framework\TestCase;
 
 require_once "helpers.php";
 
 /**
- * Class ProducerTest
+ * Class ConsumerTest
  * @package OneSite\Kafka
  */
-class ProducerTest extends TestCase
+class ConsumerTest extends TestCase
 {
 
     /**
@@ -28,7 +27,7 @@ class ProducerTest extends TestCase
     {
         parent::setUp();
 
-        $this->service = new Producer();
+        $this->service = new Consumer();
     }
 
     /**
@@ -42,9 +41,9 @@ class ProducerTest extends TestCase
     }
 
     /**
-     * PHPUnit test: vendor/bin/phpunit --filter testSend tests/ProducerTest.php
+     * PHPUnit test: vendor/bin/phpunit --filter testListener tests/ConsumerTest.php
      */
-    public function testSend()
+    public function testListener()
     {
         $data = $this->service->send();
 
