@@ -46,10 +46,10 @@ class ConsumerTest extends TestCase
     public function testListener()
     {
         $this->service->listener(function ($topic, $response) {
-            $data = json_encode([
-                'topic' => $topic,
-                'response' => $response,
-            ]);
+            $data = "\n" . json_encode([
+                    'topic' => $topic,
+                    'response' => $response,
+                ]);
 
             file_put_contents('data.txt', $data, FILE_APPEND | LOCK_EX);
         });
